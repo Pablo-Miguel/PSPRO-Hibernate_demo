@@ -4,6 +4,7 @@
  */
 package com.mycompany.pspro.hibernate_demo.ej2_with_model;
 
+import com.mycompany.pspro.hibernate_demo.model.User;
 import java.io.File;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,7 +14,7 @@ import org.hibernate.cfg.Configuration;
  *
  * @author Nitro
  */
-public class TestConxServ {
+public class Ejemplo2 {
     public static void main(String[] args) {
         File f = new File("hibernate.cfg.xml");
         SessionFactory factory = new Configuration().configure(f).addAnnotatedClass(User.class).buildSessionFactory();

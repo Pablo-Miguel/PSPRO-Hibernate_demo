@@ -4,13 +4,14 @@
  */
 package com.mycompany.pspro.hibernate_demo.ej1_conx_serv;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 /**
  *
  * @author Nitro
  */
-public class TestConxServ {
+public class Ejemplo1 {
     public static void main(String[] args) {
         String jdbcUrl = "jdbc:mysql://localhost:3306/hibernatedemo?useSSL=false";
         String user="root";

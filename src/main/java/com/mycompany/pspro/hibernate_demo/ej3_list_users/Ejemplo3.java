@@ -4,6 +4,7 @@
  */
 package com.mycompany.pspro.hibernate_demo.ej3_list_users;
 
+import com.mycompany.pspro.hibernate_demo.model.User;
 import java.io.File;
 import java.util.List;
 import org.hibernate.Session;
@@ -15,7 +16,7 @@ import org.hibernate.query.Query;
  *
  * @author Nitro
  */
-public class TestConxServ {
+public class Ejemplo3 {
     public static void main(String[] args) {
         File f = new File("hibernate.cfg.xml");
         SessionFactory factory = new Configuration().configure(f).addAnnotatedClass(User.class).buildSessionFactory();
@@ -29,13 +30,13 @@ public class TestConxServ {
             session.beginTransaction();
             
             Query<User> query = session.createQuery("from User");
-            TestConxServ.mostrarQuery(query);
+            Ejemplo3.mostrarQuery(query);
             
             query = session.createQuery("from User u where u.name='Pablo' ");
-            TestConxServ.mostrarQuery(query);
+            Ejemplo3.mostrarQuery(query);
             
             query = session.createQuery("from User u where u.name='Pablo' or u.id=2");
-            TestConxServ.mostrarQuery(query);
+            Ejemplo3.mostrarQuery(query);
             
             session.getTransaction().commit();
             
@@ -50,7 +51,7 @@ public class TestConxServ {
     }
     
     private static void mostrarQuery(Query<User> query){
-        List<User> users = query.getResultList();
+        List<User> users = query.list();
         for(User u : users){
             System.out.println(u);
         }

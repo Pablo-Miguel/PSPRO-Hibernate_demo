@@ -12,6 +12,8 @@ package com.mycompany.pspro.hibernate_demo;
 public class PSPROHibernate_demo {
 
     public static void main(String[] args) {
+        //Para relaciones ManyToMany
+        //https://refactorizando.com/ejemplo-relacion-manytomany-hibernate/
         System.out.println("Hello World!");
     }
 }

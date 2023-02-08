@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.pspro.hibernate_demo.ej2_with_model;
+package com.mycompany.pspro.hibernate_demo.model;
 
 import jakarta.persistence.*;
 import java.util.Objects;
@@ -12,20 +12,25 @@ import java.util.Objects;
  * @author Nitro
  */
 @Entity
-@Table(name="user")
-public class User {
+@Table(name="person")
+public class Person {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private Integer id;
+    
     @Column(name="name")
     private String name;
-
-    public User() {
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id_address")
+    private Address address;
+    
+    public Person() {
     }
-
-    public User(String name) {
+    
+    public Person(String name) {
         this.name = name;
     }
 
@@ -45,10 +50,18 @@ public class User {
         this.name = name;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 19 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -63,13 +76,13 @@ public class User {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final User other = (User) obj;
+        final Person other = (Person) obj;
         return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + '}';
+        return "Person{" + "id=" + id + ", name=" + name + ", address=" + address + '}';
     }
     
 }

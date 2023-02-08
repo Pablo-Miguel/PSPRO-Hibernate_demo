@@ -4,19 +4,24 @@
  */
 package com.mycompany.pspro.hibernate_demo.ej4_update_delete;
 
+import com.mycompany.pspro.hibernate_demo.model.User;
 import java.io.File;
-import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
+
+
 /**
  *
  * @author Nitro
  */
-public class TestConxServ {
+public class Ejemplo4 {
     public static void main(String[] args) {
+        
+        //https://www.tutorialspoint.com/hibernate/hibernate_query_language.htm --> Para consultas HQL
+        
         File f = new File("hibernate.cfg.xml");
         SessionFactory factory = new Configuration().configure(f).addAnnotatedClass(User.class).buildSessionFactory();
             
@@ -36,24 +41,25 @@ public class TestConxServ {
             
             System.out.println("User actualizado de la forma 1 correctamente!!");
             
-            /*
-            //Segunda forma de hacer un update
             session.beginTransaction();
-            
-            session.createQuery("update user u set u.name='Juan' where u.name like 'M%'").executeUpdate();
-            
+            String hql = "UPDATE User set name = :name WHERE name LIKE :nameSearch";
+            Query query = session.createQuery(hql);
+            query.setParameter("name", "Juan");
+            query.setParameter("nameSearch", "M%");
+            int result = query.executeUpdate();
+            System.out.println("Rows affected: " + result);
             session.getTransaction().commit();
             
             System.out.println("User actualizado de la forma 2 correctamente!!");
             
             session.beginTransaction();
-            
-            session.createQuery("delete user u where u.id=" + userId).executeUpdate();
-            
+            hql = "DELETE FROM User WHERE name=:name";
+            query = session.createQuery(hql);
+            query.setParameter("name", "Carlos");
+            result = query.executeUpdate();
+            System.out.println("Rows affected: " + result);
             session.getTransaction().commit();
-            
             System.out.println("User eliminado correctamente!!");
-            */
             
             session.close();
             
@@ -63,12 +69,5 @@ public class TestConxServ {
             
         }
         
-    }
-    
-    private static void mostrarQuery(Query<User> query){
-        List<User> users = query.getResultList();
-        for(User u : users){
-            System.out.println(u);
-        }
     }
 }
